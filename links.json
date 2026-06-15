@@ -5,10 +5,23 @@
       "label": "Home",
       "groups": [
         {
-          "name": "Cambodia House",
+          "name": "Home (Main)",
+          "links": [
+            { "label": "Frigate (Cameras)", "url": "http://192.168.0.104:5000/" },
+            { "label": "Home Assistant", "url": "http://192.168.0.103:8123/" }
+          ]
+        },
+        {
+          "name": "598 House",
           "links": [
             { "label": "Frigate (Cameras)", "url": "http://192.168.9.103:5000/" },
             { "label": "Home Assistant", "url": "http://192.168.9.101:8123/" }
+          ]
+        },
+        {
+          "name": "Road 9 House",
+          "links": [
+            { "label": "Home Assistant", "url": "http://192.168.123.101:8123/lovelace/home" }
           ]
         },
         {
@@ -17,21 +30,8 @@
             { "label": "Frigate (Cameras)", "url": "http://192.168.124.103:5000/" },
             { "label": "Home Assistant", "url": "http://192.168.124.101:8123/lovelace/home" }
           ]
-        },
-        {
-          "name": "SaoKun NR6 House",
-          "links": [
-            { "label": "Frigate (Cameras)", "url": "http://192.168.130.103:5000/" },
-            { "label": "Home Assistant", "url": "http://192.168.130.101:8123/lovelace/home" }
-          ]
-        },
-        {
-          "name": "Home (Main)",
-          "links": [
-            { "label": "Frigate (Cameras)", "url": "http://192.168.0.104:5000/" },
-            { "label": "Home Assistant", "url": "http://192.168.0.103:8123/" }
-          ]
         }
+
       ]
     },
     {
@@ -85,15 +85,6 @@
             { "label": "Frigate Dockge", "url": "http://192.168.9.103:5001/" },
             { "label": "Frigate (go2rtc)", "url": "http://192.168.9.103:1984/" },
             { "label": "Zigbee2MQTT", "url": "http://192.168.9.104:8080/" }
-          ]
-        },
-        {
-          "name": "SaoKun NR6 House",
-          "links": [
-            { "label": "Proxmox", "url": "https://100.92.35.81:8006/" },
-            { "label": "Home Assistant", "url": "http://192.168.130.101:8123/lovelace/home" },
-            { "label": "Frigate (Live)", "url": "http://192.168.130.103:5000/" },
-            { "label": "File Browser (HA config)", "url": "http://192.168.130.101:8080/files/var/lib/docker/volumes/hass_config/_data/configuration.yaml" }
           ]
         },
         {

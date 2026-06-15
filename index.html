@@ -12,7 +12,7 @@
             --text-muted: #94a3b8;
             --accent: #38bdf8;
             --accent-dim: rgba(56, 189, 248, 0.1);
-            --gap: 12px;
+            --gap: 8px; /* Slightly reduced gap */
         }
 
         * {
@@ -86,7 +86,7 @@
         .group-title {
             font-size: 1.1rem;
             color: var(--accent);
-            margin: 24px 0 12px 0;
+            margin: 14px 0 12px 0;
             padding-bottom: 4px;
             border-bottom: 1px solid #334155;
         }
@@ -97,11 +97,12 @@
 
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            /* Update 1: List style, one column */
+            grid-template-columns: 1fr;
             gap: var(--gap);
         }
 
-        /* Touch-friendly Dashboard Cards */
+        /* Update 2: Touch-friendly List Item (smaller, left icon) */
         .card {
             background-color: var(--card-bg);
             border: 1px solid #334155;
@@ -109,12 +110,14 @@
             text-decoration: none;
             color: inherit;
             display: flex;
-            flex-direction: column;
+            /* Horizontal layout for left icon, right text */
+            flex-direction: row; 
             align-items: center;
-            justify-content: center;
-            padding: 20px 12px;
-            text-align: center;
-            min-height: 110px;
+            justify-content: flex-start; /* Left aligned */
+            /* Reduced padding for smaller height */
+            padding: 5px 5px; 
+            text-align: left; /* Left aligned text */
+            min-height: 0; /* Let padding define height */
             transition: transform 0.1s ease, border-color 0.2s ease;
         }
 
@@ -124,9 +127,17 @@
         }
 
         .card-icon {
-            font-size: 2rem;
-            margin-bottom: 8px;
+            font-size: 1.8rem; /* Slightly smaller icon */
+            margin-right: 16px; /* Space between icon and text */
+            margin-bottom: 0; /* Reset margin from old design */
             display: block;
+            flex-shrink: 0; /* Don't squash icon */
+        }
+
+        .card-text-container {
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1; /* Take remaining space */
         }
 
         .card-name {
@@ -228,7 +239,9 @@
 
                                 card.innerHTML = `
                                     <span class="card-icon">${icon}</span>
-                                    <span class="card-name">${link.label}</span>
+                                    <div class="card-text-container">
+                                        <span class="card-name">${link.label}</span>
+                                    </div>
                                 `;
                                 grid.appendChild(card);
                             });
