@@ -28,6 +28,7 @@
             color: var(--text-main);
             padding: 16px;
             padding-top: 70px; /* Space for fixed header */
+            overflow-x: hidden; /* Prevent horizontal scroll bounce */
         }
 
         /* Fixed Navigation / Tabs at top */
@@ -97,12 +98,11 @@
 
         .grid {
             display: grid;
-            /* Update 1: List style, one column */
             grid-template-columns: 1fr;
             gap: var(--gap);
         }
 
-        /* Update 2: Touch-friendly List Item (smaller, left icon) */
+        /* Touch-friendly List Item (smaller, left icon) */
         .card {
             background-color: var(--card-bg);
             border: 1px solid #334155;
@@ -110,14 +110,12 @@
             text-decoration: none;
             color: inherit;
             display: flex;
-            /* Horizontal layout for left icon, right text */
             flex-direction: row; 
             align-items: center;
-            justify-content: flex-start; /* Left aligned */
-            /* Reduced padding for smaller height */
+            justify-content: flex-start;
             padding: 5px 5px; 
-            text-align: left; /* Left aligned text */
-            min-height: 0; /* Let padding define height */
+            text-align: left;
+            min-height: 0;
             transition: transform 0.1s ease, border-color 0.2s ease;
         }
 
@@ -127,17 +125,17 @@
         }
 
         .card-icon {
-            font-size: 1.8rem; /* Slightly smaller icon */
-            margin-right: 16px; /* Space between icon and text */
-            margin-bottom: 0; /* Reset margin from old design */
+            font-size: 1.8rem;
+            margin-right: 16px;
+            margin-bottom: 0;
             display: block;
-            flex-shrink: 0; /* Don't squash icon */
+            flex-shrink: 0;
         }
 
         .card-text-container {
             display: flex;
             flex-direction: column;
-            flex-grow: 1; /* Take remaining space */
+            flex-grow: 1;
         }
 
         .card-name {
@@ -218,17 +216,14 @@
                     // 3. Populate Groups and Links
                     if (tab.groups) {
                         tab.groups.forEach(group => {
-                            // Create Group Title (e.g., "Cambodia House")
                             const groupTitle = document.createElement('h3');
                             groupTitle.className = 'group-title';
                             groupTitle.textContent = group.name;
                             contentPane.appendChild(groupTitle);
 
-                            // Create Grid for this group
                             const grid = document.createElement('div');
                             grid.className = 'grid';
 
-                            // Populate Link Cards
                             group.links.forEach(link => {
                                 const card = document.createElement('a');
                                 card.href = link.url;
@@ -253,6 +248,9 @@
                     contentContainer.appendChild(contentPane);
                 });
 
+                // Initialize swipe gestures after loading
+                initSwipeControls();
+
             } catch (err) {
                 contentContainer.innerHTML = `<div class="error-msg"><h3>Error</h3><p>${err.message}</p></div>`;
             }
@@ -271,6 +269,60 @@
 
             // Save state to persistence engine
             localStorage.setItem('activeTab', tabId);
+        }
+
+        // --- NEW SWIPE LOGIC ---
+        function initSwipeControls() {
+            let touchStartX = 0;
+            let touchStartY = 0;
+            let touchEndX = 0;
+            let touchEndY = 0;
+
+            const threshold = 60; // Minimum pixel swipe distance
+            const restraint = 80; // Maximum allowed vertical distance (so vertical scrolling isn't mistaken for a swipe)
+
+            document.addEventListener('touchstart', e => {
+                touchStartX = e.changedTouches[0].screenX;
+                touchStartY = e.changedTouches[0].screenY;
+            }, { passive: true });
+
+            document.addEventListener('touchend', e => {
+                touchEndX = e.changedTouches[0].screenX;
+                touchEndY = e.changedTouches[0].screenY;
+                handleSwipeGesture();
+            }, { passive: true });
+
+            function handleSwipeGesture() {
+                const deltaX = touchEndX - touchStartX;
+                const deltaY = touchEndY - touchStartY;
+
+                // Check if the gesture is mostly horizontal and meets distance requirements
+                if (Math.abs(deltaX) >= threshold && Math.abs(deltaY) <= restraint) {
+                    if (deltaX < 0) {
+                        // Swiped Left -> Go to Next Tab
+                        navigateTab(1);
+                    } else {
+                        // Swiped Right -> Go to Previous Tab
+                        navigateTab(-1);
+                    }
+                }
+            }
+
+            function navigateTab(direction) {
+                const tabs = Array.from(document.querySelectorAll('.tab-btn'));
+                if (tabs.length === 0) return;
+
+                const activeIndex = tabs.findIndex(btn => btn.classList.contains('active'));
+                if (activeIndex === -1) return;
+
+                let nextIndex = activeIndex + direction;
+
+                // Ensure we don't go out of bounds
+                if (nextIndex >= 0 && nextIndex < tabs.length) {
+                    const nextTabId = tabs[nextIndex].getAttribute('data-tab-id');
+                    switchTab(nextTabId);
+                }
+            }
         }
 
         // Bootstrapping
