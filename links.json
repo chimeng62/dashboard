@@ -1,0 +1,109 @@
+{
+  "tabs": [
+    {
+      "id": "family",
+      "label": "Home",
+      "groups": [
+        {
+          "name": "Cambodia House",
+          "links": [
+            { "label": "Frigate (Cameras)", "url": "http://192.168.9.103:5000/" },
+            { "label": "Home Assistant", "url": "http://192.168.9.101:8123/" }
+          ]
+        },
+        {
+          "name": "Korngva House",
+          "links": [
+            { "label": "Frigate (Cameras)", "url": "http://192.168.124.103:5000/" },
+            { "label": "Home Assistant", "url": "http://192.168.124.101:8123/lovelace/home" }
+          ]
+        },
+        {
+          "name": "SaoKun NR6 House",
+          "links": [
+            { "label": "Frigate (Cameras)", "url": "http://192.168.130.103:5000/" },
+            { "label": "Home Assistant", "url": "http://192.168.130.101:8123/lovelace/home" }
+          ]
+        },
+        {
+          "name": "Home (Main)",
+          "links": [
+            { "label": "Frigate (Cameras)", "url": "http://192.168.0.104:5000/" },
+            { "label": "Home Assistant", "url": "http://192.168.0.103:8123/" }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "admin",
+      "label": "Admin",
+      "groups": [
+        {
+          "name": "Home Proxmox",
+          "links": [
+            { "label": "Proxmox", "url": "https://192.168.0.2:8006/" },
+            { "label": "Home Assistant", "url": "http://192.168.0.103:8123/" },
+            { "label": "Frigate", "url": "http://192.168.0.104:5000/" },
+            { "label": "Frigate (go2rtc)", "url": "http://192.168.0.104:1984/" },
+            { "label": "Immich (Photos)", "url": "http://192.168.0.102:2283/" },
+            { "label": "Paperless-ngx", "url": "http://192.168.0.105:8000/dashboard" },
+            { "label": "Zigbee2MQTT", "url": "http://192.168.0.109:8080/#/" },
+            { "label": "Zigbee2MQTT Devices", "url": "http://192.168.0.109:8080/#/devices" },
+            { "label": "Pi-hole", "url": "http://192.168.0.114/admin/" },
+            { "label": "Uptime Kuma", "url": "http://192.168.0.112:3001/setup" },
+            { "label": "Pulse", "url": "http://192.168.0.101:7655/" },
+            { "label": "Homepage", "url": "http://192.168.0.100:3000/" },
+            { "label": "erpNext", "url": "http://192.168.0.108:8080/app/home" },
+            { "label": "erpNext POS", "url": "http://192.168.0.108:8080/app/point-of-sale" }
+          ]
+        },
+        {
+          "name": "Road9 Proxmox",
+          "links": [
+            { "label": "Proxmox", "url": "https://192.168.123.10:8006/" },
+            { "label": "Home Assistant", "url": "http://192.168.123.101:8123/lovelace/home" },
+            { "label": "Portainer", "url": "http://road-9-rpi5-server:9000/" },
+            { "label": "Duplicati", "url": "http://road-9-rpi5-server:8200/ngax/index.html#/" }
+          ]
+        },
+        {
+          "name": "Korngva Proxmox",
+          "links": [
+            { "label": "Proxmox", "url": "https://192.168.124.10:8006/" },
+            { "label": "Home Assistant", "url": "http://192.168.124.101:8123/lovelace/home" },
+            { "label": "Frigate", "url": "http://192.168.124.103:5000/" },
+            { "label": "Frigate (go2rtc)", "url": "http://192.168.124.103:1984/" },
+            { "label": "Frigate Dockge", "url": "http://192.168.124.103:5001/compose/frigate_nvr" }
+          ]
+        },
+        {
+          "name": "Phnom Penh (prox-home-598)",
+          "links": [
+            { "label": "Proxmox", "url": "https://192.168.9.10:8006/" },
+            { "label": "Home Assistant", "url": "http://192.168.9.101:8123/" },
+            { "label": "Frigate (Live)", "url": "http://192.168.9.103:5000/" },
+            { "label": "Frigate Dockge", "url": "http://192.168.9.103:5001/" },
+            { "label": "Frigate (go2rtc)", "url": "http://192.168.9.103:1984/" },
+            { "label": "Zigbee2MQTT", "url": "http://192.168.9.104:8080/" }
+          ]
+        },
+        {
+          "name": "SaoKun NR6 House",
+          "links": [
+            { "label": "Proxmox", "url": "https://100.92.35.81:8006/" },
+            { "label": "Home Assistant", "url": "http://192.168.130.101:8123/lovelace/home" },
+            { "label": "Frigate (Live)", "url": "http://192.168.130.103:5000/" },
+            { "label": "File Browser (HA config)", "url": "http://192.168.130.101:8080/files/var/lib/docker/volumes/hass_config/_data/configuration.yaml" }
+          ]
+        },
+        {
+          "name": "HP T620 Testing",
+          "links": [
+            { "label": "Proxmox", "url": "https://192.168.131.10:8006/" },
+            { "label": "Home Assistant", "url": "http://192.168.131.101:8123/lovelace/home" }
+          ]
+        }
+      ]
+    }
+  ]
+}
