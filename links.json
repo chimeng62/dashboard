@@ -7,28 +7,28 @@
         {
           "name": "Home",
           "links": [
-            { "label": "Frigate (Cameras)", "url": "http://192.168.0.104:5000/" },
-            { "label": "Home Assistant", "url": "http://192.168.0.103:8123/" }
+            { "label": "Frigate (Cameras)", "id": "104", "url": "http://192.168.0.104:5000/" },
+            { "label": "Home Assistant", "id": "103", "url": "http://192.168.0.103:8123/" }
           ]
         },
         {
           "name": "598 House",
           "links": [
-            { "label": "Frigate (Cameras)", "url": "http://192.168.9.103:5000/" },
-            { "label": "Home Assistant", "url": "http://192.168.9.101:8123/" }
+            { "label": "Frigate (Cameras)", "id": "103", "url": "http://192.168.9.103:5000/" },
+            { "label": "Home Assistant", "id": "101", "url": "http://192.168.9.101:8123/" }
           ]
         },
         {
           "name": "Road 9 House",
           "links": [
-            { "label": "Home Assistant", "url": "http://192.168.123.101:8123/lovelace/home" }
+            { "label": "Home Assistant", "id": "101", "url": "http://192.168.123.101:8123/lovelace/home" }
           ]
         },
         {
           "name": "Korngva House",
           "links": [
-            { "label": "Frigate (Cameras)", "url": "http://192.168.124.103:5000/" },
-            { "label": "Home Assistant", "url": "http://192.168.124.101:8123/lovelace/home" }
+            { "label": "Frigate (Cameras)", "id": "103", "url": "http://192.168.124.103:5000/" },
+            { "label": "Home Assistant", "id": "101", "url": "http://192.168.124.101:8123/lovelace/home" }
           ]
         }
       ]
@@ -40,51 +40,50 @@
         {
           "name": "home - 192.168.0.0",
           "links": [
-            { "label": "Proxmox", "url": "https://192.168.0.2:8006/" },
-            { "label": "Home Assistant", "url": "http://192.168.0.103:8123/" },
-            { "label": "Frigate", "url": "http://192.168.0.104:5000/" },
-            { "label": "Frigate (go2rtc)", "url": "http://192.168.0.104:1984/" },
-            { "label": "Frigate Dockge", "url": "http://192.168.0.104:5001/compose" },
-            { "label": "Immich (Photos)", "url": "http://192.168.0.102:2283/" },
-            { "label": "Immich Dockge", "url": "http://192.168.0.102:5001/compose" },
-            { "label": "Paperless-ngx", "url": "http://192.168.0.105:8000/dashboard" },
-            { "label": "Zigbee2MQTT", "url": "http://192.168.0.109:8080/#/" },
-            { "label": "Zigbee2MQTT Devices", "url": "http://192.168.0.109:8080/#/devices" },
-            { "label": "Pi-hole", "url": "http://192.168.0.114/admin/" },
-            { "label": "Uptime Kuma", "url": "http://192.168.0.112:3001/setup" },
-            { "label": "Pulse", "url": "http://192.168.0.101:7655/" },
-            { "label": "Homepage", "url": "http://192.168.0.100:3000/" },
-            { "label": "erpNext Dockge", "url": "http://192.168.0.108:5001/" },
-            { "label": "erpNext", "url": "http://192.168.0.108:8080/app/home" },
-            { "label": "erpNext POS", "url": "http://192.168.0.108:8080/app/point-of-sale" }
+            { "label": "Proxmox", "id": "host", "url": "https://192.168.0.2:8006/" },
+            { "label": "Homepage", "id": "100", "url": "http://192.168.0.100:3000/" },
+            { "label": "Pulse", "id": "101", "url": "http://192.168.0.101:7655/" },
+            { "label": "Immich (Photos)", "id": "102", "url": "http://192.168.0.102:2283/" },
+            { "label": "Immich Dockge", "id": "102", "url": "http://192.168.0.102:5001/compose" },
+            { "label": "Home Assistant", "id": "103", "url": "http://192.168.0.103:8123/" },
+            { "label": "Frigate", "id": "104", "url": "http://192.168.0.104:5000/" },
+            { "label": "Frigate (go2rtc)", "id": "104", "url": "http://192.168.0.104:1984/" },
+            { "label": "Frigate Dockge", "id": "104", "url": "http://192.168.0.104:5001/compose" },
+            { "label": "Paperless-ngx", "id": "105", "url": "http://192.168.0.105:8000/dashboard" },
+            { "label": "erpNext", "id": "108", "url": "http://192.168.0.108:8080/app/home" },
+            { "label": "erpNext POS", "id": "108", "url": "http://192.168.0.108:8080/app/point-of-sale" },
+            { "label": "erpNext Dockge", "id": "108", "url": "http://192.168.0.108:5001/" },
+            { "label": "Zigbee2MQTT", "id": "109", "url": "http://192.168.0.109:8080" },
+            { "label": "Uptime Kuma", "id": "112", "url": "http://192.168.0.112:3001/setup" },
+            { "label": "Pi-hole", "id": "114", "url": "http://192.168.0.114/admin/" }
           ]
         },
         {
           "name": "prox-swiftlet-road9 - 192.168.123.0",
           "links": [
-            { "label": "Proxmox", "url": "https://192.168.123.10:8006/" },
-            { "label": "Home Assistant", "url": "http://192.168.123.101:8123/lovelace/home" }
+            { "label": "Proxmox", "id": "host", "url": "https://192.168.123.10:8006/" },
+            { "label": "Home Assistant", "id": "101", "url": "http://192.168.123.101:8123/lovelace/home" }
           ]
         },
         {
           "name": "prox-swiftlet-korngva - 192.168.124.0",
           "links": [
-            { "label": "Proxmox", "url": "https://192.168.124.10:8006/" },
-            { "label": "Home Assistant", "url": "http://192.168.124.101:8123/lovelace/home" },
-            { "label": "Frigate", "url": "http://192.168.124.103:5000/" },
-            { "label": "Frigate (go2rtc)", "url": "http://192.168.124.103:1984/" },
-            { "label": "Frigate Dockge", "url": "http://192.168.124.103:5001/compose" }
+            { "label": "Proxmox", "id": "host", "url": "https://192.168.124.10:8006/" },
+            { "label": "Home Assistant", "id": "101", "url": "http://192.168.124.101:8123/lovelace/home" },
+            { "label": "Frigate", "id": "103", "url": "http://192.168.124.103:5000/" },
+            { "label": "Frigate (go2rtc)", "id": "103", "url": "http://192.168.124.103:1984/" },
+            { "label": "Frigate Dockge", "id": "103", "url": "http://192.168.124.103:5001/compose" }
           ]
         },
         {
           "name": "prox-home-598 - 192.168.9.0",
           "links": [
-            { "label": "Proxmox", "url": "https://192.168.9.10:8006/" },
-            { "label": "Home Assistant", "url": "http://192.168.9.101:8123/" },
-            { "label": "Frigate (Live)", "url": "http://192.168.9.103:5000/" },
-            { "label": "Frigate Dockge", "url": "http://192.168.9.103:5001/" },
-            { "label": "Frigate (go2rtc)", "url": "http://192.168.9.103:1984/" },
-            { "label": "Zigbee2MQTT", "url": "http://192.168.9.104:8080/" }
+            { "label": "Proxmox", "id": "host", "url": "https://192.168.9.10:8006/" },
+            { "label": "Home Assistant", "id": "101", "url": "http://192.168.9.101:8123/" },
+            { "label": "Frigate (Live)", "id": "103", "url": "http://192.168.9.103:5000/" },
+            { "label": "Frigate Dockge", "id": "103", "url": "http://192.168.9.103:5001/" },
+            { "label": "Frigate (go2rtc)", "id": "103", "url": "http://192.168.9.103:1984/" },
+            { "label": "Zigbee2MQTT", "id": "104", "url": "http://192.168.9.104:8080/" }
           ]
         }
       ]

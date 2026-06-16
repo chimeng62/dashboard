@@ -135,6 +135,18 @@
             line-height: 1.25;
         }
 
+        .card-id {
+            font-size: 0.72rem;
+            font-weight: 400;
+            color: var(--text-muted);
+            margin-top: 2px;
+        }
+
+        .card-text {
+            display: flex;
+            flex-direction: column;
+        }
+
         .error-msg {
             text-align: center;
             color: #f87171;
@@ -161,9 +173,10 @@
     <main id="dashboard-content"></main>
 
     <script>
-       function getIconForLabel(label) {
+        function getIconForLabel(label) {
             const lower = label.toLowerCase();
             if (lower.includes('dockge')) return '🐳';
+            if (lower.includes('portainer')) return '🐳';
             if (lower.includes('frigate') || lower.includes('camera')) return '📹';
             if (lower.includes('home assistant')) return '🏠';
             if (lower.includes('proxmox')) return '🖥️';
@@ -173,7 +186,6 @@
             if (lower.includes('pi-hole')) return '🛡️';
             if (lower.includes('uptime')) return '⏱️';
             if (lower.includes('pulse')) return '📊';
-            if (lower.includes('portainer')) return '🐳';
             if (lower.includes('erpnext') || lower.includes('pos')) return '💼';
             if (lower.includes('file')) return '📁';
             if (lower.includes('duplicati') || lower.includes('backup')) return '💾';
@@ -226,10 +238,14 @@
                                 card.rel = 'noopener';
 
                                 const icon = getIconForLabel(link.label);
+                                const idTag = link.id ? `<span class="card-id">${link.id === 'host' ? 'Host' : 'CT ' + link.id}</span>` : '';
 
                                 card.innerHTML = `
                                     <span class="card-icon">${icon}</span>
-                                    <span class="card-name">${link.label}</span>
+                                    <span class="card-text">
+                                        <span class="card-name">${link.label}</span>
+                                        ${idTag}
+                                    </span>
                                 `;
                                 grid.appendChild(card);
                             });
