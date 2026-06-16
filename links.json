@@ -30,8 +30,13 @@
             { "label": "Frigate (Cameras)", "url": "http://192.168.124.103:5000/" },
             { "label": "Home Assistant", "url": "http://192.168.124.101:8123/lovelace/home" }
           ]
+        },
+        {
+          "name": "Apps",
+          "links": [
+            { "label": "Tailscale", "url": "intent://#Intent;package=com.tailscale.ipn;launchFlags=0x10000000;end" }
+          ]
         }
-
       ]
     },
     {

@@ -11,8 +11,8 @@
             --text-main: #f8fafc;
             --text-muted: #94a3b8;
             --accent: #38bdf8;
-            --accent-dim: rgba(56, 189, 248, 0.1);
-            --gap: 8px; /* Slightly reduced gap */
+            --accent-dim: rgba(56, 189, 248, 0.12);
+            --gap: 8px;
         }
 
         * {
@@ -27,17 +27,16 @@
             background-color: var(--bg-color);
             color: var(--text-main);
             padding: 16px;
-            padding-top: 70px; /* Space for fixed header */
-            overflow-x: hidden; /* Prevent horizontal scroll bounce */
+            padding-top: 70px;
+            overflow-x: hidden;
         }
 
-        /* Fixed Navigation / Tabs at top */
         header {
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
-            background-color: rgba(15, 23, 42, 0.8);
+            background-color: rgba(15, 23, 42, 0.85);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
             z-index: 100;
@@ -48,7 +47,7 @@
             display: flex;
             max-width: 600px;
             margin: 0 auto;
-            padding: 8px 16px;
+            padding: 10px 16px;
             gap: 8px;
         }
 
@@ -60,9 +59,9 @@
             padding: 12px;
             font-size: 1rem;
             font-weight: 600;
-            border-radius: 8px;
+            border-radius: 10px;
             cursor: pointer;
-            transition: all 0.2s ease;
+            transition: all 0.15s ease;
             text-align: center;
         }
 
@@ -71,12 +70,11 @@
             background-color: var(--accent-dim);
         }
 
-        /* Dashboard Content Matrix */
         .tab-content {
             display: none;
             max-width: 600px;
             margin: 0 auto;
-            animation: fadeIn 0.2s ease-in-out;
+            animation: fadeIn 0.18s ease-out;
             padding-bottom: 40px;
         }
 
@@ -85,24 +83,24 @@
         }
 
         .group-title {
-            font-size: 1.1rem;
-            color: var(--accent);
-            margin: 14px 0 12px 0;
-            padding-bottom: 4px;
-            border-bottom: 1px solid #334155;
+            font-size: 0.95rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            color: var(--text-muted);
+            margin: 18px 4px 8px 4px;
         }
 
         .group-title:first-child {
-            margin-top: 8px;
+            margin-top: 4px;
         }
 
         .grid {
             display: grid;
-            grid-template-columns: 1fr;
+            grid-template-columns: 1fr 1fr;
             gap: var(--gap);
         }
 
-        /* Touch-friendly List Item (smaller, left icon) */
         .card {
             background-color: var(--card-bg);
             border: 1px solid #334155;
@@ -110,44 +108,42 @@
             text-decoration: none;
             color: inherit;
             display: flex;
-            flex-direction: row; 
             align-items: center;
-            justify-content: flex-start;
-            padding: 5px 5px; 
-            text-align: left;
-            min-height: 0;
-            transition: transform 0.1s ease, border-color 0.2s ease;
+            padding: 12px 10px;
+            min-height: 48px;
+            transition: transform 0.1s ease, border-color 0.15s ease, background-color 0.15s ease;
         }
 
         .card:active {
             transform: scale(0.97);
             border-color: var(--accent);
+            background-color: #243348;
         }
 
         .card-icon {
-            font-size: 1.8rem;
-            margin-right: 16px;
-            margin-bottom: 0;
-            display: block;
+            font-size: 1.4rem;
+            margin-right: 10px;
             flex-shrink: 0;
-        }
-
-        .card-text-container {
-            display: flex;
-            flex-direction: column;
-            flex-grow: 1;
+            width: 24px;
+            text-align: center;
         }
 
         .card-name {
-            font-size: 0.95rem;
+            font-size: 0.88rem;
             font-weight: 500;
             word-break: break-word;
+            line-height: 1.25;
         }
 
         .error-msg {
             text-align: center;
             color: #f87171;
-            margin-top: 40px;
+            margin-top: 60px;
+            padding: 0 20px;
+        }
+
+        .error-msg h3 {
+            margin-bottom: 8px;
         }
 
         @keyframes fadeIn {
@@ -165,7 +161,6 @@
     <main id="dashboard-content"></main>
 
     <script>
-        // Helper function to auto-assign emojis based on the link label
         function getIconForLabel(label) {
             const lower = label.toLowerCase();
             if (lower.includes('frigate') || lower.includes('camera')) return '📹';
@@ -176,10 +171,14 @@
             if (lower.includes('paperless')) return '📄';
             if (lower.includes('pi-hole')) return '🛡️';
             if (lower.includes('uptime')) return '⏱️';
+            if (lower.includes('pulse')) return '📊';
             if (lower.includes('dockge') || lower.includes('portainer')) return '🐳';
-            if (lower.includes('erpnext')) return '💼';
+            if (lower.includes('erpnext') || lower.includes('pos')) return '💼';
             if (lower.includes('file')) return '📁';
-            return '🔗'; // Fallback
+            if (lower.includes('duplicati') || lower.includes('backup')) return '💾';
+            if (lower.includes('homepage')) return '🧭';
+            if (lower.includes('tailscale')) return '🔒';
+            return '🔗';
         }
 
         async function initDashboard() {
@@ -187,20 +186,16 @@
             const contentContainer = document.getElementById('dashboard-content');
 
             try {
-                // Fetch the configuration file
                 const response = await fetch('links.json');
                 if (!response.ok) throw new Error('Failed to load links.json. Make sure the file exists in the same directory.');
                 const data = await response.json();
 
-                // Determine which tab to open first (Check localStorage, fallback to first item)
                 const savedTab = localStorage.getItem('activeTab');
-                const initialTabId = data.tabs.some(tab => tab.id === savedTab) 
-                    ? savedTab 
+                const initialTabId = data.tabs.some(tab => tab.id === savedTab)
+                    ? savedTab
                     : data.tabs[0]?.id;
 
-                // Render structure dynamically based on your specific JSON format
                 data.tabs.forEach((tab) => {
-                    // 1. Create Tab Button
                     const btn = document.createElement('button');
                     btn.className = `tab-btn ${tab.id === initialTabId ? 'active' : ''}`;
                     btn.textContent = tab.label;
@@ -208,12 +203,10 @@
                     btn.setAttribute('data-tab-id', tab.id);
                     tabsBar.appendChild(btn);
 
-                    // 2. Create Tab Content Pane Container
                     const contentPane = document.createElement('div');
                     contentPane.id = `pane-${tab.id}`;
                     contentPane.className = `tab-content ${tab.id === initialTabId ? 'active' : ''}`;
 
-                    // 3. Populate Groups and Links
                     if (tab.groups) {
                         tab.groups.forEach(group => {
                             const groupTitle = document.createElement('h3');
@@ -228,15 +221,14 @@
                                 const card = document.createElement('a');
                                 card.href = link.url;
                                 card.className = 'card';
-                                card.target = '_self'; 
+                                card.target = '_blank';
+                                card.rel = 'noopener';
 
                                 const icon = getIconForLabel(link.label);
 
                                 card.innerHTML = `
                                     <span class="card-icon">${icon}</span>
-                                    <div class="card-text-container">
-                                        <span class="card-name">${link.label}</span>
-                                    </div>
+                                    <span class="card-name">${link.label}</span>
                                 `;
                                 grid.appendChild(card);
                             });
@@ -248,38 +240,27 @@
                     contentContainer.appendChild(contentPane);
                 });
 
-                // Initialize swipe gestures after loading
                 initSwipeControls();
 
             } catch (err) {
-                contentContainer.innerHTML = `<div class="error-msg"><h3>Error</h3><p>${err.message}</p></div>`;
+                contentContainer.innerHTML = `<div class="error-msg"><h3>Couldn't load dashboard</h3><p>${err.message}</p></div>`;
             }
         }
 
         function switchTab(tabId) {
-            // Update active states on Buttons
             document.querySelectorAll('.tab-btn').forEach(btn => {
                 btn.classList.toggle('active', btn.getAttribute('data-tab-id') === tabId);
             });
-
-            // Update active states on Content Panes
             document.querySelectorAll('.tab-content').forEach(pane => {
                 pane.classList.toggle('active', pane.id === `pane-${tabId}`);
             });
-
-            // Save state to persistence engine
             localStorage.setItem('activeTab', tabId);
         }
 
-        // --- NEW SWIPE LOGIC ---
         function initSwipeControls() {
-            let touchStartX = 0;
-            let touchStartY = 0;
-            let touchEndX = 0;
-            let touchEndY = 0;
-
-            const threshold = 60; // Minimum pixel swipe distance
-            const restraint = 80; // Maximum allowed vertical distance (so vertical scrolling isn't mistaken for a swipe)
+            let touchStartX = 0, touchStartY = 0, touchEndX = 0, touchEndY = 0;
+            const threshold = 60;
+            const restraint = 80;
 
             document.addEventListener('touchstart', e => {
                 touchStartX = e.changedTouches[0].screenX;
@@ -295,37 +276,23 @@
             function handleSwipeGesture() {
                 const deltaX = touchEndX - touchStartX;
                 const deltaY = touchEndY - touchStartY;
-
-                // Check if the gesture is mostly horizontal and meets distance requirements
                 if (Math.abs(deltaX) >= threshold && Math.abs(deltaY) <= restraint) {
-                    if (deltaX < 0) {
-                        // Swiped Left -> Go to Next Tab
-                        navigateTab(1);
-                    } else {
-                        // Swiped Right -> Go to Previous Tab
-                        navigateTab(-1);
-                    }
+                    navigateTab(deltaX < 0 ? 1 : -1);
                 }
             }
 
             function navigateTab(direction) {
                 const tabs = Array.from(document.querySelectorAll('.tab-btn'));
                 if (tabs.length === 0) return;
-
                 const activeIndex = tabs.findIndex(btn => btn.classList.contains('active'));
                 if (activeIndex === -1) return;
-
-                let nextIndex = activeIndex + direction;
-
-                // Ensure we don't go out of bounds
+                const nextIndex = activeIndex + direction;
                 if (nextIndex >= 0 && nextIndex < tabs.length) {
-                    const nextTabId = tabs[nextIndex].getAttribute('data-tab-id');
-                    switchTab(nextTabId);
+                    switchTab(tabs[nextIndex].getAttribute('data-tab-id'));
                 }
             }
         }
 
-        // Bootstrapping
         document.addEventListener('DOMContentLoaded', initDashboard);
     </script>
 </body>
